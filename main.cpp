@@ -1,27 +1,5 @@
 #include "mylib.h"
 
-int failoGeneravimas(int kiek) {
-    srand(time(0));
-    string pavadinimas = "kursiokai" + to_string(kiek) + ".txt";
-    ofstream outputFile(pavadinimas);
-    outputFile << "Vardas Pavardė";
-    int nd = rand()%15+1;
-    for (int i = 1; i <= nd; ++i) {
-        outputFile << " ND" << i;
-    }
-    outputFile << " Egz." << endl;
-    for (int i = 1; i <= kiek; ++i) {
-        outputFile << "Vardas" << to_string(i) << " " << "Pavardė" << to_string(i);
-        for (int j = 1; j <= nd; ++j) {
-            int pazymys = rand()%10+1;
-            outputFile << " " << pazymys;
-        }
-        outputFile << " " << rand()%10+1 << endl;
-    }
-    outputFile.close();
-    cout << "Failas kursiokai" << to_string(kiek) << ".txt" <<  " sugeneruotas. " << endl;
-    return 0;
-}
 double vidurkis(vector<int>& v, int e) {
     double suma = 0;
     for (int i=0; i < v.size(); i++) {
@@ -82,9 +60,9 @@ void apieStudenta(studentas &studentas) {
     studentas.galvid = vidurkis(studentas.pazymiai, studentas.egz);
     studentas.galmed = mediana(studentas.pazymiai, studentas.egz);
 }
-vector<studentas> isFailo() {
+vector<studentas> isFailo(string pavadinimas) {
     vector<studentas> studentai;
-    ifstream file("kursiokai1000.txt");
+    ifstream file(pavadinimas);
     if (!file.is_open()) {
         cerr << "Nepavyko atidaryti failo." << endl;
     }
@@ -126,6 +104,11 @@ vector<vector<studentas>> skirstymas(vector<studentas> studentai) {
 }
 void iFaila(vector<studentas> v, string pavadinimas) {
     ofstream outFile(pavadinimas);
+    outFile << "Vardas Pavardė";
+    for (int i = 1; i <= v[0].pazymiai.size(); ++i) {
+        outFile << " ND" << i;
+    }
+    outFile << " Egz." << endl;
     for (int i = 0; i < v.size(); i++) {
         outFile << v[i].vardas << " " << v[i].pavarde << " ";
         for (int j = 0; j < v[i].pazymiai.size(); j++) {
@@ -170,29 +153,27 @@ int main() {
             }
         }
     } else if (duomenys == "f") {
-        string arGen;
-        cout << "Ar generuoti studentų failus? Jei taip - spausti 'g', o jei ne - spausti bet ką kitą. ";
-        cin >> arGen;
-        if (arGen == "g") {
-            failoGeneravimas(1000);
-            failoGeneravimas(10000);
-            failoGeneravimas(100000);
-            failoGeneravimas(1000000);
-            failoGeneravimas(10000000);
+        string pavadinimas, time, testi;
+        cout << "Failo pavadinimas: ";
+        cin >> pavadinimas;
+        cout << endl << "Ar rodyti programos veikimo greicio analize? Jei taip - spausti 't', o jei ne - spausti bet ką kitą. ";
+        cin >> time;
+        if (time == "t") {
+            cout << endl << "PROGRAMOS VEIKIMO GREIČIO ANALIZĖ: " << endl;
+            timer();
         }
-        studentai = isFailo();
-        vector<studentas> vargsiukai;
-        vector<vector<studentas>> suskirstyti;
-        suskirstyti = skirstymas(studentai);
-        iFaila(suskirstyti[0], "vargsiukai.txt");
-        iFaila(suskirstyti[1], "kietekai.txt");
-        studentai = isFailo();
-        cout << left << setw(15) << "Vardas" << setw(15) << "Pavardė" << setw(15) << "Galutinis(vid.) " << setw(15) << "Galutinis(med.) " << endl << 
-        "--------------------------------------------------------------" << endl;
-        for (int i = 0; i < studentai.size(); i++) {
-            cout << left << setw(15) << studentai[i].vardas << setw(15) << studentai[i].pavarde 
-            << setw(15) << setprecision(2) << studentai[i].galvid << setw(15) << setprecision(2) << studentai[i].galmed;
-            cout << endl;
+        cout << endl << "Spauskite 't', jei norite testi. ";
+        cin >> testi;
+        cout << endl;
+        if (testi == "t") {
+            studentai = isFailo(pavadinimas);
+            cout << left << setw(15) << "Vardas" << setw(15) << "Pavardė" << setw(15) << "Galutinis(vid.) " << setw(15) << "Galutinis(med.) " << endl << 
+            "--------------------------------------------------------------" << endl;
+            for (int i = 0; i < studentai.size(); i++) {
+                cout << left << setw(15) << studentai[i].vardas << setw(15) << studentai[i].pavarde 
+                << setw(15) << setprecision(2) << studentai[i].galvid << setw(15) << setprecision(2) << studentai[i].galmed;
+                cout << endl;
+            }
         }
     }
 }

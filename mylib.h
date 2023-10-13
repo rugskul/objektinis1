@@ -7,6 +7,7 @@
 #include <time.h>
 #include <fstream>
 #include <ctime>
+#include <chrono>
 
 using namespace std;
 
@@ -16,3 +17,8 @@ struct studentas {
     vector<int> pazymiai;
     double galvid, galmed;
 };
+
+vector<studentas> isFailo(string);
+void iFaila(vector<studentas>, string);
+vector<vector<studentas>> skirstymas(vector<studentas>);
+void timer();
