@@ -28,11 +28,13 @@ void apieStudenta(studentas &studentas) {
         cin >> arAtsitiktinai;
         if (arAtsitiktinai == "a") {
             //atsitiktiniai namu darbu pazymiai ir egzamino rezultatas
-            srand(time(0));
-            for (int j = 0; j < rand()%10+1; j++) {
-                studentas.pazymiai.push_back(rand() % 10 + 1);
+            random_device rd; 
+            mt19937 gen(rd());
+            uniform_int_distribution<> dis(1, 10);
+            for (int j = 0; j < dis(gen); j++) {
+                studentas.pazymiai.push_back(dis(gen));
             }
-            studentas.egz = rand() % 10 + 1;
+            studentas.egz = dis(gen);
         } else if (arAtsitiktinai == "r") {
             //pazymiu ivedimas su enter
             cout << "Namų darbų pažymiai (baigti 2 kartus paspaudus ENTER): " << endl;

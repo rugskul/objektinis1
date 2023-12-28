@@ -1,11 +1,15 @@
 #include "..\include\funkcijos.h"
 
 int failoGeneravimas(int kiek) {
-    srand(time(0));
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(1, 10);
+    uniform_int_distribution<> disNd(1, 15);
+
     string pavadinimas = "kursiokai" + to_string(kiek) + ".txt";
     ofstream outputFile(pavadinimas);
     outputFile << "Vardas Pavardė";
-    int nd = rand()%15+1;
+    int nd = disNd(gen);
     for (int i = 1; i <= nd; ++i) {
         outputFile << " ND" << i;
     }
@@ -13,10 +17,10 @@ int failoGeneravimas(int kiek) {
     for (int i = 1; i <= kiek; ++i) {
         outputFile << "Vardas" << to_string(i) << " " << "Pavardė" << to_string(i);
         for (int j = 1; j <= nd; ++j) {
-            int pazymys = rand()%10+1;
+            int pazymys = dis(gen);
             outputFile << " " << pazymys;
         }
-        outputFile << " " << rand()%10+1 << endl;
+        outputFile << " " << dis(gen) << endl;
     }
     outputFile.close();
     cout << "Failas kursiokai" << to_string(kiek) << ".txt" <<  " sugeneruotas. " << endl;
