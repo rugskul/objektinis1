@@ -1,4 +1,4 @@
-#include "funkcijos.h"
+#include "..\include\funkcijos.h"
 
 bool sortVardas(studentas a, studentas b) {
     return a.vardas < b.vardas;

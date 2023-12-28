@@ -1,9 +1,9 @@
-#include "funkcijos.h"
+#include "..\include\funkcijos.h"
 
 template <typename Container>
 Container isFailo(string pavadinimas) {
     Container studentai;
-    ifstream file(pavadinimas);
+    ifstream file("../" + pavadinimas);
     
     if (!file.is_open()) {
         cerr << "Nepavyko atidaryti failo." << endl;
@@ -39,7 +39,7 @@ template list<studentas> isFailo(string pavadinimas);
 
 template <typename Container>
 void iFaila(Container studentai, string pavadinimas) {
-    ofstream outFile(pavadinimas);
+    ofstream outFile("../" + pavadinimas);
 
     outFile << "Vardas Pavardė";
     for (int i = 1; i <= studentai.begin()->pazymiai.size(); ++i) {

@@ -1,4 +1,4 @@
-#include "funkcijos.h"
+#include "..\include\funkcijos.h"
 
 int main() {
     string time, duomenys, vectorlist;
@@ -56,7 +56,7 @@ int main() {
             cin >> pavadinimas;
             studentai = isFailo<vector<studentas>>(pavadinimas);
             printf(studentai);
-        } else {
+        } else {    
             cerr << "Įveskite 'r' arba 'f'. ";
         }
     } while (duomenys != "f" && duomenys != "r");

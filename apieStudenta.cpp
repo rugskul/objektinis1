@@ -1,4 +1,4 @@
-#include "funkcijos.h"
+#include "..\include\funkcijos.h"
 
 double vidurkis(vector<int> v, int e) {
     double suma = 0;

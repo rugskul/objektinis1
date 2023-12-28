@@ -1,4 +1,4 @@
-#include "funkcijos.h"
+#include "..\include\funkcijos.h"
 
 void printr(vector<studentas> studentai, string vidmed) {
    cout << left << setw(15) << "Vardas" 

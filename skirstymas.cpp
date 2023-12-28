@@ -1,4 +1,4 @@
-#include "funkcijos.h"
+#include "..\include\funkcijos.h"
 
 template <typename Container>
 pair<Container, Container> skirstymas1(Container studentai) {
